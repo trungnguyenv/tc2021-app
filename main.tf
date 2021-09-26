@@ -7,6 +7,17 @@ terraform {
   }
 }
 
+provider "aws" {
+  profile = "default"
+  region  = var.region
+
+  default_tags {
+    tags = {
+      Environment = var.environment
+    }
+  }
+}
+
 data "terraform_remote_state" "network" {
   backend = "remote"
 
