@@ -8,16 +8,20 @@ terraform {
 }
 
 data "terraform_remote_state" "network" {
-  backend = "remote"
+  backend   = "remote"
   workspace = var.network_workspace
+
+  config {
+    organization = "trungnguyenv"
+  }
 }
 
 module "ec2" {
   source = "./ec2"
 
-  environment = var.environment
+  environment       = var.environment
   deployer_key_name = var.deployer_key_name
-  public_subnet_id = data.terraform_remote_state.network.outputs.public_subnet_id
+  public_subnet_id  = data.terraform_remote_state.network.outputs.public_subnet_id
   security_groups = [
     data.terraform_remote_state.network.outputs.default_security_group_id,
     data.terraform_remote_state.network.outputs.www_security_group_id,
