@@ -10,7 +10,7 @@ terraform {
 data "terraform_remote_state" "network" {
   backend = "remote"
 
-  config {
+  config = {
     organization = "trungnguyenv"
     workspaces = {
       name = var.network_workspace
