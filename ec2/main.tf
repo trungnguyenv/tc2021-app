@@ -10,6 +10,8 @@ data "aws_ami" "amazon_linux_2_ami" {
 }
 
 resource "aws_instance" "app_server" {
+  count = var.number_of_app_instances
+
   ami             = data.aws_ami.amazon_linux_2_ami.id
   instance_type   = "t2.micro"
   key_name        = var.deployer_key_name
@@ -22,6 +24,6 @@ resource "aws_instance" "app_server" {
   }
 
   tags = {
-    Name = "${var.environment}-app"
+    Name = "${var.environment}-app-${format("%02d", count.index + 1)}"
   }
 }
