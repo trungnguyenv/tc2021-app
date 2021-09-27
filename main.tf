@@ -40,4 +40,5 @@ module "ec2" {
     data.terraform_remote_state.network.outputs.www_security_group_id,
     data.terraform_remote_state.network.outputs.private_access_security_group_id
   ]
+  number_of_app_instances = var.number_of_app_instances
 }
