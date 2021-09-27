@@ -24,6 +24,6 @@ resource "aws_instance" "app_server" {
   }
 
   tags = {
-    Name = "${var.environment}-app-${format("%02d", count.index)}"
+    Name = "${var.environment}-app-${format("%02d", count.index + 1)}"
   }
 }
