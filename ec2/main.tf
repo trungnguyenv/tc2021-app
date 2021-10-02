@@ -18,7 +18,7 @@ resource "aws_instance" "app_server" {
   subnet_id              = var.public_subnet_id
   vpc_security_group_ids = var.security_groups
   user_data              = templatefile("${path.module}/cloud-init.sh.tpl", {
-    HostName = format("%02d", count.index + 1)
+    HostName = "${var.environment}-app-${format("%02d", count.index + 1)}"
   })
 
   root_block_device {
